@@ -1,11 +1,6 @@
 import { SignJWT, jwtVerify } from 'jose';
 import type { SessionUser } from '@/types';
-
-const COOKIE_NAME = 'mp_admin_session';
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'mp-lubricentro-dev-secret-change-in-production'
-);
-const SESSION_DURATION = 60 * 60 * 8; // 8 hours max, inactivity handled client-side
+import { COOKIE_NAME, SESSION_DURATION, getJwtSecret } from './auth/constants';
 
 export { COOKIE_NAME };
 
@@ -14,12 +9,12 @@ export async function createSessionToken(user: SessionUser): Promise<string> {
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime(`${SESSION_DURATION}s`)
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 }
 
 export async function verifySessionToken(token: string): Promise<SessionUser | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     return payload as unknown as SessionUser;
   } catch {
     return null;
