@@ -6,6 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'MP Lubri',
     description: 'Consultá el estado de tu vehículo y próximos services en MP Lubricentro',
     start_url: '/portal',
+    scope: '/portal',
+    id: '/portal',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#09090b',

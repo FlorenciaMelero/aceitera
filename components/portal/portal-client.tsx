@@ -5,12 +5,17 @@ import type { PortalData } from '@/types';
 import { InstallBanner } from '@/components/portal/install-banner';
 import { PendingOrders, VehicleCard } from '@/components/portal/vehicle-card';
 import { ServiceWorkerRegister } from '@/components/portal/service-worker-register';
+import { savePortalToken } from '@/lib/portal-storage';
 import { MapPin, Phone, Loader2 } from 'lucide-react';
 
 export default function PortalPage({ token }: { token: string }) {
   const [data, setData] = useState<PortalData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    savePortalToken(token);
+  }, [token]);
 
   useEffect(() => {
     fetch(`/api/portal/${token}`)

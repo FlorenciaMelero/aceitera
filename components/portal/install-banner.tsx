@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Download, Share, Smartphone, X } from 'lucide-react';
+import { savePortalToken } from '@/lib/portal-storage';
 import { Button } from '@/components/ui/button';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -48,6 +49,9 @@ export function InstallBanner() {
 
   async function installAndroid() {
     if (!deferredPrompt) return;
+    // Guardar token del URL actual para que /portal funcione al abrir el acceso directo
+    const match = window.location.pathname.match(/^\/portal\/([^/]+)/);
+    if (match?.[1]) savePortalToken(match[1]);
     await deferredPrompt.prompt();
     await deferredPrompt.userChoice;
     setDeferredPrompt(null);
