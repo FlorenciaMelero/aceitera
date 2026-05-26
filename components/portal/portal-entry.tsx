@@ -13,9 +13,15 @@ export default function PortalEntryPage() {
     const token = getPortalToken();
     if (token) {
       router.replace(`/portal/${token}`);
-    } else {
-      setMissing(true);
+      return;
     }
+    // Pequeña espera por si la cookie tarda en iOS standalone
+    const timer = setTimeout(() => {
+      const retry = getPortalToken();
+      if (retry) router.replace(`/portal/${retry}`);
+      else setMissing(true);
+    }, 400);
+    return () => clearTimeout(timer);
   }, [router]);
 
   if (missing) {

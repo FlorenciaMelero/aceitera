@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from 'next';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import PortalEntryPage from '@/components/portal/portal-entry';
+import { PORTAL_TOKEN_COOKIE } from '@/lib/portal-storage';
 
 export const metadata: Metadata = {
   title: 'Mi vehículo | MP Lubricentro',
@@ -18,6 +21,10 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function PortalHomePage() {
+export default async function PortalHomePage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(PORTAL_TOKEN_COOKIE)?.value;
+  if (token) redirect(`/portal/${token}`);
+
   return <PortalEntryPage />;
 }
