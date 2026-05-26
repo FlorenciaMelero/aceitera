@@ -242,15 +242,23 @@ export async function getDb(): Promise<MockDatabase> {
     return memoryStore;
   } catch {
     memoryStore = createSeed();
-    await saveDb(memoryStore);
+    try {
+      await saveDb(memoryStore);
+    } catch {
+      // Vercel/serverless: filesystem read-only — usar solo memoria
+    }
     return memoryStore;
   }
 }
 
 export async function saveDb(db: MockDatabase): Promise<void> {
   memoryStore = db;
-  await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
-  await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf-8');
+  try {
+    await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
+    await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf-8');
+  } catch {
+    // Ignorar en entornos read-only (Vercel)
+  }
 }
 
 export async function resetDb(): Promise<MockDatabase> {
