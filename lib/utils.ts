@@ -45,8 +45,23 @@ export function generatePortalToken(): string {
 }
 
 export function getPortalBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, '');
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, '');
+  }
+  // URL estable de producción — NO usar VERCEL_URL (cada deploy tiene URL protegida)
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL.replace(/\/$/, '')}`;
+  }
+  if (process.env.VERCEL_ENV === 'production' && process.env.VERCEL_URL) {
+    // Fallback: alias conocido del proyecto
+    const host = process.env.VERCEL_URL;
+    if (!host.includes('-git-') && !/-[a-z0-9]{8,}-/.test(host)) {
+      return `https://${host}`;
+    }
+  }
+  if (process.env.VERCEL_URL && process.env.VERCEL_ENV !== 'production') {
+    return `https://${process.env.VERCEL_URL}`;
+  }
   return 'http://localhost:3000';
 }
 

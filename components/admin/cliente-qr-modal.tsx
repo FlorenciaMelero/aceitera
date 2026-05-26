@@ -77,6 +77,12 @@ export function ClienteQrModal({ clienteId, clienteNombre, onClose }: ClienteQrM
               <p className="text-center text-sm text-muted-foreground">
                 El cliente escanea el QR y ve sus vehículos. Puede agregar acceso directo en su celular.
               </p>
+              {url && isProtectedDeployUrl(url) && (
+                <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-200">
+                  Este link usa una URL de deploy privada. En Vercel agregá{' '}
+                  <strong>NEXT_PUBLIC_APP_URL=https://aceitera-tau.vercel.app</strong> y regenerá el QR.
+                </p>
+              )}
               <div className="flex gap-2">
                 <InputReadonly value={url} />
                 <Button variant="outline" size="icon" onClick={copyLink} title="Copiar link">
@@ -109,4 +115,14 @@ function InputReadonly({ value }: { value: string }) {
       className="flex h-9 w-full min-w-0 rounded-md border border-input bg-muted/50 px-3 text-xs text-muted-foreground"
     />
   );
+}
+
+/** URLs de preview/deploy de Vercel suelen pedir login (GitHub/Vercel) */
+function isProtectedDeployUrl(url: string): boolean {
+  try {
+    const host = new URL(url).hostname;
+    return host.includes('-git-') || /aceitera-[a-z0-9]+-flor-melero\.vercel\.app/.test(host);
+  } catch {
+    return false;
+  }
 }
