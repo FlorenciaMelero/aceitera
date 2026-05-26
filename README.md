@@ -1,21 +1,63 @@
-# MP Lubricentro - Gestión Local
+# MP Lubricentro — Sistema de Gestión
 
-Sitio web local para llevar registro de cambios de aceite, mantenimientos y cambio de piezas de vehículos.
+Aplicación Next.js 14 fullstack para gestión integral de lubricentro automotor.
 
-## Qué incluye
+## Stack
 
-- `index.html`: interfaz web profesional para uso local
-- `styles.css`: diseño moderno y responsive
-- `app.js`: base de datos local con IndexedDB y lógica de registro
+- **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS + shadcn/ui
+- **Gráficos**: Recharts
+- **Excel**: SheetJS (xlsx)
+- **Datos (Fase 1)**: Mock store JSON en `data/store.json`
+- **Auth (Fase 1)**: JWT en cookie httpOnly
+- **Supabase (Fase 7)**: Stubs listos en `lib/repositories/supabase/`
 
-## Cómo usar
+## Instalación
 
-1. Abre `index.html` en tu navegador.
-2. Registra vehículos, cambios de aceite, mantenimiento y piezas.
-3. Los datos se guardan en tu navegador mediante IndexedDB.
+```bash
+npm install
+npm run dev
+```
 
-## Nota sobre el cliente
+Abrir [http://localhost:3000](http://localhost:3000)
 
-El proyecto está diseñado para MP Lubricentro en Eduardo Sosa 2188, Barrio Santa Isabel 1ª Sección, Córdoba, Argentina.
+## Rutas
 
-No se encontró una página web pública oficial del negocio durante la búsqueda, por lo que se preparó una solución local directamente para el cliente.
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Landing pública MP Lubricentro |
+| `/admin/login` | Login admin (modal 10s auto-cierre) |
+| `/admin/dashboard` | Dashboard con KPIs y gráficos |
+| `/admin/productos` | CRUD productos + import/export Excel |
+| `/admin/stock` | Inventario, alertas, movimientos |
+| `/admin/clientes` | CRUD clientes |
+| `/admin/vehiculos` | CRUD vehículos |
+| `/admin/ordenes` | Órdenes de trabajo + descuento stock |
+| `/admin/servicios` | Plantillas PM |
+| `/admin/proveedores` | Proveedores + sugerencias compra |
+| `/admin/caja` | Caja, balance, cuentas corrientes |
+| `/admin/reportes` | Reportes y audit log |
+| `/admin/configuracion` | Config negocio, usuarios, categorías |
+
+## Credenciales demo
+
+- **Admin**: `admin@lubricentro.local` / `Admin123!`
+- **Técnico**: `tecnico@lubricentro.local` / `Tecnico123!`
+
+## Funcionalidades
+
+- Sesión admin con cierre por inactividad (30 s)
+- Inventario con alertas de stock bajo/excesivo
+- Importación Excel con validación por fila
+- OT con plantillas PM y descuento automático de stock
+- Caja, proveedores, cuentas corrientes
+- Dashboard con 8 gráficos
+- Buscador global en header admin
+- Combos/paquetes y plantillas PM
+- Galería fotos OT (URLs mock)
+- Alertas vencimiento por lote
+- Import one-time desde IndexedDB legacy
+- Arquitectura repository preparada para Supabase
+
+## Cliente
+
+MP Lubricentro — Eduardo Sosa 2188, Barrio Santa Isabel 1ª Sección, Córdoba, Argentina.

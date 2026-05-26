@@ -3,383 +3,292 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MP Lubricentro - Gestión Local</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>MP Lubricentro — Córdoba</title>
+  <meta name="description" content="Cambio de aceite, filtros, mantenimiento y repuestos en Córdoba, Argentina." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #ff7a00;
+      --bg: #09090b;
+      --bg-card: rgba(24, 24, 27, 0.8);
+      --border: rgba(255, 122, 0, 0.2);
+      --text: #fafafa;
+      --muted: #a1a1aa;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(to bottom, #09090b, #18181b, #000);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .dev-banner {
+      background: rgba(255, 122, 0, 0.12);
+      border-bottom: 1px solid var(--border);
+      padding: 0.65rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .dev-banner strong { color: var(--brand); }
+    .dev-banner code {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .header-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.25rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.75rem;
+      background: var(--brand);
+      color: #000;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .brand h1 { font-size: 1.25rem; font-weight: 700; }
+    .brand p { font-size: 0.875rem; color: var(--muted); }
+
+    .staff-link {
+      font-size: 0.875rem;
+      color: #71717a;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .staff-link:hover { color: var(--brand); }
+
+    main {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 42rem;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      border: 1px solid #27272a;
+      border-radius: 1rem;
+      background: rgba(24, 24, 27, 0.5);
+      padding: 1.5rem;
+    }
+
+    .card svg {
+      width: 2rem;
+      height: 2rem;
+      color: var(--brand);
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .contact {
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--bg-card);
+      padding: 2rem;
+    }
+
+    .contact h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .contact-item svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--brand);
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item .label { font-weight: 500; margin-bottom: 0.25rem; }
+    .contact-item .value { color: var(--muted); line-height: 1.5; }
+
+    .contact-item a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover { text-decoration: underline; }
+
+    footer {
+      border-top: 1px solid #27272a;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #71717a;
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-container">
+  <div class="dev-banner">
+    Vista estática local. Panel admin completo: <code>npm install</code> → <code>npm run dev</code> →
+    <a href="http://localhost:3000/admin/login" style="color:#ff7a00">localhost:3000/admin/login</a>
+  </div>
+
+  <header>
+    <div class="header-inner">
       <div class="brand">
-        <div class="brand-logo">MP</div>
+        <div class="logo">MP</div>
         <div>
           <h1>MP Lubricentro</h1>
-          <p>Eduardo Sosa 2188, Barrio Santa Isabel 1ª Sección, Córdoba</p>
-          <p>Tel: <a href="tel:+543512079348">351 207 9348</a></p>
+          <p>Córdoba, Argentina</p>
         </div>
       </div>
-      <div class="auth-buttons">
-        <button id="login-btn" class="btn-secondary">Ingresa</button>
-        <button id="signup-btn" class="btn-primary">Crear Cuenta</button>
-        <div id="user-menu" class="user-menu-container" style="display: none;">
-          <button id="user-menu-toggle" class="user-menu-toggle">
-            <span id="user-name" class="user-name"></span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </button>
-          <div id="user-menu-dropdown" class="user-menu-dropdown">
-            <button id="profile-btn" class="menu-item">
-              <span>👤</span> Mi Perfil
-            </button>
-            <button id="settings-btn" class="menu-item">
-              <span>⚙️</span> Configuración
-            </button>
-            <button id="change-password-btn" class="menu-item">
-              <span>🔑</span> Cambiar Contraseña
-            </button>
-            <div class="menu-divider"></div>
-            <button id="delete-account-btn" class="menu-item delete">
-              <span>🗑️</span> Eliminar Cuenta
-            </button>
-            <button id="logout-btn" class="menu-item logout">
-              <span>↪️</span> Desloguear
-            </button>
-          </div>
-        </div>
-      </div>
+      <a class="staff-link" href="http://localhost:3000/admin/login" title="Requiere npm run dev">Acceso staff</a>
     </div>
   </header>
 
-  <div id="auth-modal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      
-      <div id="login-form-container" class="auth-form-container active">
-        <h2>Ingresa a tu cuenta</h2>
-        <form id="login-form" class="auth-form">
-          <label>
-            Email
-            <input type="email" id="login-email" required placeholder="tu@email.com" />
-          </label>
-          <label>
-            Contraseña
-            <input type="password" id="login-password" required placeholder="••••••••" />
-          </label>
-          <button type="submit" class="btn-primary">Ingresar</button>
-          <p class="form-switch">¿No tienes cuenta? <button type="button" id="switch-to-signup">Crear una aquí</button></p>
-        </form>
-      </div>
+  <main>
+    <section class="hero">
+      <h2>Tu lubricentro de confianza en Córdoba</h2>
+      <p>
+        Cambio de aceite, filtros, mantenimiento y repuestos. Atención profesional para tu vehículo.
+      </p>
+    </section>
 
-      <div id="signup-form-container" class="auth-form-container">
-        <h2>Crea tu cuenta</h2>
-        <form id="signup-form" class="auth-form">
-          <label>
-            Nombre completo
-            <input type="text" id="signup-name" required placeholder="Juan Pérez" />
-          </label>
-          <label>
-            Email
-            <input type="email" id="signup-email" required placeholder="tu@email.com" />
-          </label>
-          <label>
-            Contraseña
-            <input type="password" id="signup-password" required placeholder="••••••••" />
-          </label>
-          <label>
-            Confirmar contraseña
-            <input type="password" id="signup-password-confirm" required placeholder="••••••••" />
-          </label>
-          <button type="submit" class="btn-primary">Crear Cuenta</button>
-          <p class="form-switch">¿Ya tienes cuenta? <button type="button" id="switch-to-login">Ingresar aquí</button></p>
-        </form>
-      </div>
+    <div class="cards">
+      <article class="card">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M8 7h8M6 11h12M8 15h8" />
+        </svg>
+        <h3>Cambio de aceite</h3>
+        <p>Aceites sintéticos y minerales de primera calidad.</p>
+      </article>
+      <article class="card">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg>
+        <h3>Mantenimiento</h3>
+        <p>Service completo, filtros, líquidos y diagnóstico.</p>
+      </article>
+      <article class="card">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        <h3>Repuestos</h3>
+        <p>Piezas y accesorios para todo tipo de vehículos.</p>
+      </article>
     </div>
-  </div>
 
-  <div id="profile-modal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      <h2>Mi Perfil</h2>
-      <div id="profile-info" class="profile-info">
-        <div class="info-row">
-          <label>Nombre:</label>
-          <span id="profile-name"></span>
+    <section class="contact">
+      <h3>Contacto</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <div>
+            <p class="label">Dirección</p>
+            <p class="value">Eduardo Sosa 2188, Barrio Santa Isabel 1ª Sección, Córdoba</p>
+          </div>
         </div>
-        <div class="info-row">
-          <label>Email:</label>
-          <span id="profile-email"></span>
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <div>
+            <p class="label">Teléfono</p>
+            <p class="value"><a href="tel:+543512079348">351 207 9348</a></p>
+          </div>
         </div>
-        <div class="info-row">
-          <label>Miembro desde:</label>
-          <span id="profile-date"></span>
-        </div>
-      </div>
-      <button id="close-profile-btn" class="btn-secondary">Cerrar</button>
-    </div>
-  </div>
-
-  <div id="edit-profile-modal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      <h2>Editar Perfil</h2>
-      <form id="edit-profile-form" class="auth-form">
-        <label>
-          Nombre completo
-          <input type="text" id="edit-name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" id="edit-email" required />
-        </label>
-        <div style="display: flex; gap: 1rem;">
-          <button type="submit" class="btn-primary">Guardar Cambios</button>
-          <button type="button" class="modal-close-btn btn-secondary">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="password-modal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      <h2>Cambiar Contraseña</h2>
-      <form id="password-form" class="auth-form">
-        <label>
-          Contraseña actual
-          <input type="password" id="current-password" required placeholder="••••••••" />
-        </label>
-        <label>
-          Nueva contraseña
-          <input type="password" id="new-password" required placeholder="••••••••" />
-        </label>
-        <label>
-          Confirmar nueva contraseña
-          <input type="password" id="confirm-password" required placeholder="••••••••" />
-        </label>
-        <div style="display: flex; gap: 1rem;">
-          <button type="submit" class="btn-primary">Cambiar</button>
-          <button type="button" class="modal-close-btn btn-secondary">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="delete-account-modal" class="modal">
-    <div class="modal-content" style="max-width: 380px;">
-      <button class="modal-close">&times;</button>
-      <h2 style="color: #ff4d4d;">Eliminar Cuenta</h2>
-      <p style="color: var(--muted); margin: 1rem 0;">⚠️ Esta acción es permanente. Se eliminarán todos tus datos y no podrás recuperarlos.</p>
-      <label style="margin-bottom: 1.5rem;">
-        Contraseña para confirmar
-        <input type="password" id="delete-password" required placeholder="••••••••" />
-      </label>
-      <div style="display: flex; gap: 1rem;">
-        <button id="confirm-delete-btn" class="btn-primary" style="background: #ff4d4d;">Eliminar Permanentemente</button>
-        <button type="button" class="modal-close-btn btn-secondary">Cancelar</button>
-      </div>
-    </div>
-  </div>
-
-  <main class="container">
-    <div id="bg-decoration" class="bg-decoration" style="display: none;"></div>
-    <section class="intro-card">
-      <h2>Control de vehículos, aceite y mantenimiento</h2>
-      <p>Aplicación web local para registrar cambios de aceite, mantenimientos y cambio de piezas sin conexión a internet. Los datos se guardan en tu navegador.</p>
-      <div class="status-bar">
-        <span>Base local: <strong>IndexedDB</strong></span>
-        <span id="db-status">Iniciando...</span>
-      </div>
-    </section>
-
-    <nav class="tab-nav">
-      <button class="tab-button active" data-target="vehicles-section">Vehículos</button>
-      <button class="tab-button" data-target="oil-section">Cambios de Aceite</button>
-      <button class="tab-button" data-target="maintenance-section">Mantenimientos</button>
-      <button class="tab-button" data-target="parts-section">Piezas</button>
-      <button class="tab-button" data-target="reports-section">Reportes</button>
-      <button class="tab-button admin-only" data-target="users-section">Usuarios</button>
-    </nav>
-
-    <section id="vehicles-section" class="tab-section active">
-      <div class="section-header">
-        <h2>Vehículos</h2>
-        <p>Registra y administra datos de los autos atendidos en el lubricentro.</p>
-      </div>
-      <form id="vehicle-form" class="card form-card">
-        <h3>Registrar vehículo</h3>
-        <div class="form-grid">
-          <label>Patente<input type="text" id="vehicle-license" required placeholder="Ej. ABC123" /></label>
-          <label>Marca<input type="text" id="vehicle-make" placeholder="Ej. Toyota" /></label>
-          <label>Modelo<input type="text" id="vehicle-model" placeholder="Ej. Corolla" /></label>
-          <label>Año<input type="number" id="vehicle-year" min="1900" max="2100" placeholder="2023" /></label>
-          <label>Kilometraje<input type="number" id="vehicle-km" min="0" placeholder="45000" /></label>
-          <label>Cliente<input type="text" id="vehicle-owner" placeholder="Nombre del dueño" /></label>
-          <label>Teléfono<input type="text" id="vehicle-phone" placeholder="351 207 9348" /></label>
-        </div>
-        <button type="submit" class="primary-button">Guardar vehículo</button>
-      </form>
-
-      <div class="card data-card">
-        <h3>Lista de vehículos</h3>
-        <table id="vehicle-table">
-          <thead>
-            <tr><th>Patente</th><th>Marca</th><th>Modelo</th><th>Año</th><th>Km</th><th>Cliente</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="oil-section" class="tab-section">
-      <div class="section-header">
-        <h2>Cambios de Aceite</h2>
-        <p>Registra cada servicio de aceite realizado con su fecha, tipo de aceite y kilometraje.</p>
-      </div>
-      <form id="oil-form" class="card form-card">
-        <h3>Nuevo cambio de aceite</h3>
-        <div class="form-grid">
-          <label>Vehículo<select id="oil-vehicle" required></select></label>
-          <label>Fecha<input type="date" id="oil-date" required /></label>
-          <label>Tipo de aceite<input type="text" id="oil-type" placeholder="Sintético, mineral" /></label>
-          <label>Kilometraje<input type="number" id="oil-km" min="0" placeholder="45000" /></label>
-          <label>Observaciones<textarea id="oil-notes" rows="2" placeholder="Notas opcionales"></textarea></label>
-        </div>
-        <button type="submit" class="primary-button">Guardar cambio de aceite</button>
-      </form>
-
-      <div class="card data-card">
-        <h3>Historial de cambios</h3>
-        <table id="oil-table">
-          <thead>
-            <tr><th>Patente</th><th>Fecha</th><th>Tipo</th><th>Km</th><th>Notas</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="maintenance-section" class="tab-section">
-      <div class="section-header">
-        <h2>Mantenimientos</h2>
-        <p>Registra trabajos, costos y estado de cada servicio de mantenimiento.</p>
-      </div>
-      <form id="maintenance-form" class="card form-card">
-        <h3>Nuevo mantenimiento</h3>
-        <div class="form-grid">
-          <label>Vehículo<select id="maintenance-vehicle" required></select></label>
-          <label>Fecha<input type="date" id="maintenance-date" required /></label>
-          <label>Descripción<textarea id="maintenance-description" rows="2" placeholder="Descripción del trabajo"></textarea></label>
-          <label>Costo<input type="number" id="maintenance-cost" min="0" step="0.01" placeholder="5000" /></label>
-          <label>Estado<select id="maintenance-status"><option value="Pendiente">Pendiente</option><option value="Realizado">Realizado</option><option value="Entregado">Entregado</option></select></label>
-        </div>
-        <button type="submit" class="primary-button">Guardar mantenimiento</button>
-      </form>
-
-      <div class="card data-card">
-        <h3>Registros de mantenimiento</h3>
-        <table id="maintenance-table">
-          <thead>
-            <tr><th>Patente</th><th>Fecha</th><th>Descripción</th><th>Costo</th><th>Estado</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="parts-section" class="tab-section">
-      <div class="section-header">
-        <h2>Piezas</h2>
-        <p>Controla piezas cambiadas, cantidades, costos y vincula el repuesto con el vehículo.</p>
-      </div>
-      <form id="parts-form" class="card form-card">
-        <h3>Registrar pieza</h3>
-        <div class="form-grid">
-          <label>Pieza<input type="text" id="part-name" placeholder="Filtro, bujía" /></label>
-          <label>Código<input type="text" id="part-code" placeholder="Código interno" /></label>
-          <label>Vehículo<select id="part-vehicle"></select></label>
-          <label>Cantidad<input type="number" id="part-quantity" min="1" value="1" /></label>
-          <label>Costo<input type="number" id="part-cost" min="0" step="0.01" placeholder="1500" /></label>
-        </div>
-        <button type="submit" class="primary-button">Guardar pieza</button>
-      </form>
-
-      <div class="card data-card">
-        <h3>Inventario de piezas</h3>
-        <table id="parts-table">
-          <thead>
-            <tr><th>Pieza</th><th>Código</th><th>Vehículo</th><th>Cantidad</th><th>Costo</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="reports-section" class="tab-section">
-      <div class="section-header">
-        <h2>Reportes rápidos</h2>
-        <p>Revisa el estado general de tu base de datos y los últimos registros ingresados.</p>
-      </div>
-      <div class="card report-card">
-        <div class="report-item">
-          <span>Vehículos</span><strong id="report-vehicles">0</strong>
-        </div>
-        <div class="report-item">
-          <span>Cambios de aceite</span><strong id="report-oil">0</strong>
-        </div>
-        <div class="report-item">
-          <span>Mantenimientos</span><strong id="report-maintenance">0</strong>
-        </div>
-        <div class="report-item">
-          <span>Piezas</span><strong id="report-parts">0</strong>
-        </div>
-      </div>
-      <div class="card report-card">
-        <h3>Notas de diseño</h3>
-        <p>La aplicación funciona totalmente en el navegador y almacena los datos en una base local mediante IndexedDB. No requiere servidor para pruebas locales.</p>
-      </div>
-    </section>
-
-    <section id="users-section" class="tab-section admin-only">
-      <div class="section-header">
-        <h2>Usuarios</h2>
-        <p>Administra usuarios locales y asigna roles dentro de la aplicación.</p>
-      </div>
-      <form id="user-form" class="card form-card">
-        <h3>Agregar / modificar usuario</h3>
-        <input type="hidden" id="user-id" />
-        <div class="form-grid">
-          <label>Nombre completo<input type="text" id="user-name" required placeholder="Ej. María López" /></label>
-          <label>Email<input type="email" id="user-email" required placeholder="usuario@lubricentro.local" /></label>
-          <label>Rol
-            <select id="user-role">
-              <option value="user">Usuario</option>
-              <option value="admin">Administrador</option>
-            </select>
-          </label>
-          <label>Contraseña<input type="password" id="user-password" placeholder="••••••••" /></label>
-          <label>Confirmar contraseña<input type="password" id="user-password-confirm" placeholder="••••••••" /></label>
-        </div>
-        <div class="form-actions">
-          <button type="submit" id="user-form-submit" class="primary-button">Agregar usuario</button>
-          <button type="button" id="cancel-user-edit" class="btn-secondary" style="display:none;">Cancelar edición</button>
-        </div>
-      </form>
-      <div class="card data-card">
-        <h3>Lista de usuarios</h3>
-        <table id="user-table">
-          <thead>
-            <tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Acciones</th></tr>
-          </thead>
-          <tbody id="user-table-body"></tbody>
-        </table>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>MP Lubricentro - Gestión local para Córdoba, Argentina.</p>
+  <footer>
+    MP Lubricentro — Gestión local para Córdoba, Argentina
   </footer>
-
-  <script src="app.js"></script>
 </body>
 </html>
